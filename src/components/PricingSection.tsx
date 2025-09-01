@@ -70,102 +70,78 @@ export const PricingSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-muted/20">
+    <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-20">
-          <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 shadow-neural animate-fade-up">
-            💰 Planos e Preços
+        <div className="text-center mb-16">
+          <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+            Planos e Preços
           </Badge>
-          <h2 className="text-4xl md:text-6xl font-bold mb-8 text-foreground animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            Escolha o plano
-            <span className="block bg-gradient-primary bg-clip-text text-transparent">ideal para você</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+            Escolha o plano ideal para você
           </h2>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto animate-fade-up" style={{ animationDelay: '0.4s' }}>
-            🚀 Invista no seu futuro profissional com nossos planos flexíveis e acessíveis
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Invista no seu futuro profissional com nossos planos flexíveis
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-8xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {plans.map((plan, index) => (
             <Card 
               key={index} 
-              className={`group relative overflow-hidden border-border/50 shadow-neural hover:shadow-floating hover:-translate-y-3 transition-neural bg-gradient-card animate-scale-in ${
-                plan.popular ? 'border-primary/50 shadow-primary scale-105 ring-2 ring-primary/20' : ''
+              className={`relative overflow-hidden border-border/50 shadow-card hover:shadow-primary transition-smooth ${
+                plan.popular ? 'border-primary/50 shadow-primary scale-105' : ''
               }`}
-              style={{ animationDelay: `${0.6 + index * 0.2}s` }}
             >
               {plan.popular && (
-                <div className="absolute top-0 left-0 right-0 bg-gradient-primary text-primary-foreground text-center py-3 text-sm font-bold animate-glow">
+                <div className="absolute top-0 left-0 right-0 bg-gradient-primary text-primary-foreground text-center py-2 text-sm font-semibold">
                   🔥 Mais Popular
                 </div>
               )}
               
-              <CardHeader className={`${plan.popular ? 'pt-16' : 'pt-8'} pb-6`}>
-                <CardTitle className="text-2xl font-bold group-hover:text-primary transition-neural">{plan.name}</CardTitle>
-                <CardDescription className="text-base leading-relaxed">{plan.description}</CardDescription>
+              <CardHeader className={plan.popular ? 'pt-12' : ''}>
+                <CardTitle className="text-xl">{plan.name}</CardTitle>
+                <CardDescription className="text-sm">{plan.description}</CardDescription>
                 
-                <div className="pt-6">
-                  <div className="flex items-baseline gap-3 mb-2">
-                    <span className="text-4xl font-bold text-foreground">{plan.price}</span>
+                <div className="pt-4">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-3xl font-bold text-foreground">{plan.price}</span>
                     {plan.originalPrice && (
-                      <span className="text-xl text-muted-foreground line-through opacity-75">{plan.originalPrice}</span>
+                      <span className="text-lg text-muted-foreground line-through">{plan.originalPrice}</span>
                     )}
                   </div>
-                  <p className="text-sm text-muted-foreground font-medium">{plan.period}</p>
-                  {plan.originalPrice && (
-                    <div className="mt-2 text-sm font-semibold text-primary">
-                      💰 Economia de R$ {parseInt(plan.originalPrice.replace('R$ ', '')) - parseInt(plan.price.replace('R$ ', ''))}
-                    </div>
-                  )}
+                  <p className="text-sm text-muted-foreground">{plan.period}</p>
                 </div>
               </CardHeader>
               
               <CardContent>
-                <ul className="space-y-4 mb-8">
+                <ul className="space-y-3 mb-6">
                   {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start gap-4 text-sm group/item hover:translate-x-1 transition-neural">
-                      <Check className="w-5 h-5 text-primary shrink-0 mt-0.5 group-hover:animate-pulse" />
-                      <span className="font-medium leading-relaxed">{feature}</span>
+                    <li key={featureIndex} className="flex items-center gap-3 text-sm">
+                      <Check className="w-4 h-4 text-primary shrink-0" />
+                      <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
                 
                 <Button 
                   variant={plan.popular ? "hero" : "gradient"} 
-                  className={`w-full text-lg py-6 font-semibold shadow-primary hover:shadow-elegant transition-neural ${
-                    plan.popular ? 'animate-glow' : ''
-                  }`}
+                  className="w-full"
                 >
-                  {plan.name === "Mentoria VIP" ? "🤝 Agendar Conversa" : "🛒 Comprar Agora"}
+                  {plan.name === "Mentoria VIP" ? "Agendar Conversa" : "Comprar Agora"}
                 </Button>
               </CardContent>
             </Card>
           ))}
         </div>
         
-        <div className="text-center mt-16 animate-fade-up" style={{ animationDelay: '1.4s' }}>
-          <div className="bg-gradient-card rounded-2xl p-8 max-w-4xl mx-auto shadow-neural border border-border/50">
-            <p className="text-lg text-muted-foreground mb-6 font-medium">
-              ✅ Garantia de 7 dias • 🔒 Pagamento seguro • ⚡ Acesso imediato
-            </p>
-            <div className="flex flex-wrap justify-center items-center gap-8 text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <span className="text-2xl">🔒</span>
-                <span className="font-medium">SSL Seguro</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl">💳</span>
-                <span className="font-medium">Cartão ou PIX</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl">📱</span>
-                <span className="font-medium">Acesso Mobile</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl">🏆</span>
-                <span className="font-medium">Instituto3e</span>
-              </div>
-            </div>
+        <div className="text-center mt-12">
+          <p className="text-muted-foreground mb-4">
+            Garantia de 7 dias • Pagamento seguro • Acesso imediato
+          </p>
+          <div className="flex justify-center items-center gap-8 text-sm text-muted-foreground">
+            <span>🔒 SSL Seguro</span>
+            <span>💳 Cartão ou PIX</span>
+            <span>📱 Acesso Mobile</span>
           </div>
         </div>
       </div>
